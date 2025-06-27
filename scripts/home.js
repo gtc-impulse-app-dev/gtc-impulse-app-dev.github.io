@@ -1,6 +1,6 @@
 // Access global objects
-// const { Config, Logger } = window;
-// const Global = window.Global;
+const { Config, Logger } = window;
+const Global = window.Global;
 
 // Fetch permissions from API
 async function fetchPermissions() {
@@ -28,7 +28,9 @@ async function fetchPermissions() {
             throw new Error(error.error || `HTTP error! status: ${response.status}`);
         }
 
-        return await response.json();
+        const data = await response.json();
+        Logger.info('Permissions fetched', data);
+        return data;
     } catch (error) {
         Logger.error('Permissions API error', { error: error.message });
         throw error;
@@ -40,7 +42,7 @@ function renderHome(data) {
     const greeting = document.getElementById('greeting');
     const cardContainer = document.getElementById('card-container');
 
-    if (data.roleName && data.screensPermissions) {
+    if (data && data.roleName && Array.isArray(data.screensPermissions)) {
         greeting.textContent = `Hi, ${data.roleName}`;
         const modules = [
             { name: 'Shifts', emoji: '🕒', route: '/pages/shifts.html' },
@@ -52,17 +54,17 @@ function renderHome(data) {
             { name: 'Profile & Settings', emoji: '⚙️', route: '/pages/settings.html' },
         ];
 
-        // Group package-related permissions
-        const hasPackagePermission = data.screensPermissions.some(p => p.startsWith('package') || p.startsWith('parcels'));
-        let filteredModules = modules.filter(m =>
-            m.name.toLowerCase() === 'packages' ? hasPackagePermission : data.screensPermissions.includes(m.name.toLowerCase())
+        // Check all permissions and include Packages if any package-related permission exists
+        const hasPackagePermission = data.screensPermissions.some(permission =>
+            permission.startsWith('package') || permission.startsWith('parcels')
         );
-        if (hasPackagePermission && !filteredModules.some(m => m.name === 'Packages')) {
-            filteredModules.push({ name: 'Packages', emoji: '📦', route: '/pages/packages.html' });
-        }
+        const permittedModules = modules.filter(module =>
+            data.screensPermissions.includes(module.name.toLowerCase()) ||
+            (module.name.toLowerCase() === 'packages' && hasPackagePermission)
+        );
 
         cardContainer.innerHTML = '';
-        filteredModules.forEach(module => {
+        permittedModules.forEach(module => {
             const card = document.createElement('div');
             card.className = 'card';
             card.innerHTML = `<span class="card-emoji">${module.emoji}</span><span class="card-text">${module.name}</span>`;
@@ -73,7 +75,8 @@ function renderHome(data) {
             cardContainer.appendChild(card);
         });
     } else {
-        cardContainer.innerHTML = '<p>Error loading modules</p>';
+        cardContainer.innerHTML = '<p>Error loading modules. Please try again or check authentication.</p>';
+        Logger.error('Invalid permissions data', data);
     }
 }
 
