@@ -59,12 +59,12 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => {
         getUserId().then((userId) => {
             Logger.info('UserId check completed', { userId });
-            history.replaceState({}, '', userId ? '/home.html' : '/login.html');
-            window.location.href = userId ? '/home.html' : '/login.html';
+            history.replaceState({}, '', userId ? '/pages/home.html' : '/pages/login.html');
+            window.location.href = userId ? '/pages/home.html' : '/pages/login.html';
         }).catch((error) => {
             Logger.error('Error checking userId', error);
-            history.replaceState({}, '', '/login.html');
-            window.location.href = '/login.html';
+            history.replaceState({}, '', '/pages/login.html');
+            window.location.href = '/pages/login.html';
         });
     }, minWaitMs - (Date.now() - startTime));
 });
