@@ -2,8 +2,8 @@
 const MIN_WAIT_TIME = 5; // Adjust this value as needed
 
 // Access global functions
-const Global = window.Global;
-const { Config, Logger } = window;
+// const Global = window.Global;
+// const { Config, Logger } = window;
 
 // IndexedDB setup
 const dbName = 'GTCImpulseDB';
