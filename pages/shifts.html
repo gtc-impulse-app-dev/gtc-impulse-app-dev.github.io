@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="manifest" href="../manifest.json">
+  <link rel="stylesheet" href="../styles/shifts.css">
+  <title>GTC Impulse - Shifts</title>
+</head>
+<body>
+<div class="shifts-container">
+  <button class="back-button" onclick="goBack()">← Back</button>
+  <div class="tab-buttons">
+    <button class="tab-button active" onclick="switchTab('shifts')">Shifts</button>
+    <button class="tab-button" onclick="switchTab('availabilities')">Availabilities</button>
+  </div>
+  <div id="shifts-tab" class="tab-content active">
+    <h2>Current Shift</h2>
+    <div class="shift-details">
+      <p>Shift: <span id="current-shift">Not Started</span></p>
+      <button id="start-shift" class="shift-button">Start Shift</button>
+      <button id="end-shift" class="shift-button" disabled>End Shift</button>
+    </div>
+    <h2>Current Week Availability</h2>
+    <div class="availability-section" id="current-week"></div>
+  </div>
+  <div id="availabilities-tab" class="tab-content">
+    <h2>Submitted Availability (Next Week)</h2>
+    <div class="availability-section" id="next-week"></div>
+    <button class="submit-button" onclick="navigateToNewAvailability()">Submit New Availability</button>
+  </div>
+</div>
+<script src="../scripts/config.js" defer></script>
+<script src="../scripts/logger.js" defer></script>
+<script src="../scripts/global.js" defer></script>
+<script src="../scripts/shifts.js" defer></script>
+<script src="../service-worker.js" defer></script>
+</body>
+</html>
