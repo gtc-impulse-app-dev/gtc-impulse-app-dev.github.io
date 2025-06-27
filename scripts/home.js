@@ -85,7 +85,7 @@ function renderHome(data) {
 // Function to navigate to error page and clear stack
 function navigateToErrorPage() {
     history.pushState(null, '', '/pages/errorpage.html'); // Clear stack by creating a new history entry
-    window.location.href = '/errorpage.html';
+    window.location.href = '/pages/errorpage.html';
 }
 
 // Initialize home page

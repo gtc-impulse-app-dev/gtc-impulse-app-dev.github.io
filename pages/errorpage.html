@@ -17,7 +17,7 @@
       justify-content: center;
       align-items: center;
       min-height: 100vh;
-      text-align: center;
+      text-align: left;
       overflow-x: hidden;
     }
 
@@ -29,6 +29,7 @@
     .error-message {
       font-size: 18px;
       line-height: 1.6;
+      white-space: pre-wrap;
     }
 
     /* Responsive Design */
@@ -49,19 +50,18 @@
         font-size: 18px;
       }
     }
+    .error-text {
+      font-size: 18px;
+    }
   </style>
   </head>
   <body>
   <div class="error-container">
-    <div class="error-message">
-      <p><strong>ERROR</strong></p>
-      <p>We regret to inform you that a critical error has occurred within the GTC Impulse application, specifically related to the Azure App Service hosting our backend infrastructure. This issue has led to an unexpected disruption in service, preventing the application from functioning as intended. The error appears to stem from a configuration mismatch within the Azure deployment, potentially caused by an outdated deployment slot or a misconfigured application setting that failed to propagate correctly across the service instances.</p>
-      <p>The Azure App Service logs indicate a timeout exception during the initialization of the application, which may be attributed to an overload on the underlying virtual machine scale set or an issue with the App Service Plan's resource allocation. Our engineering team is actively investigating whether this is due to a recent deployment that introduced a breaking change, such as an incompatible library version or an erroneous environment variable setting that conflicts with the current runtime environment.</p>
-      <p>Further analysis of the Azure Monitor diagnostics reveals intermittent 503 Service Unavailable responses, suggesting that the application instances are cycling through restarts or are unable to maintain a stable connection to the underlying database. This could be exacerbated by a misconfigured connection string or an unexpected surge in traffic that exceeded the allocated throughput limits, triggering an auto-scaling event that failed to stabilize.</p>
-      <p>Our preliminary diagnostics also point to a potential issue with the Azure Blob Storage integration, where static assets or configuration files might not be syncing correctly, leading to missing dependencies that the application relies upon. The Azure Activity Log shows a series of failed deployment attempts over the past hour, which may indicate a continuous integration/continuous deployment (CI/CD) pipeline issue, possibly due to a corrupted artifact or an invalid YAML configuration in the Azure DevOps pipeline.</p>
-      <p>To mitigate this, we are rolling back to the last known stable deployment while simultaneously scaling up the App Service Plan to accommodate potential traffic spikes. However, this process may take several minutes, and users are advised to retry accessing the application after a short interval. In the meantime, our team is cross-referencing the Azure Resource Health status and Application Insights telemetry to pinpoint the exact failure point, which could involve a transient network glitch or a more persistent issue with the Azure SQL Database backend.</p>
-      <p>We apologize for the inconvenience and are working diligently to resolve this matter. Please bear with us as we address this critical outage. For further updates, please check your email or the GTC Impulse support portal, where we will post regular status reports. If the issue persists beyond the next hour, please contact our support team with your user ID for personalized assistance. Thank you for your patience as we strive to restore full functionality to the GTC Impulse platform.</p>
-    </div>
+    <p class="error-message"><strong class="error-text">ERROR</strong>: An unexpected critical failure has occurred in the GTC Impulse application due to an issue with the Azure App Service (Instance ID: 0x7F12A3B4). The error was logged at memory address 0xFF34ABCD with error code 0x80004005, indicating a COM initialization failure. This disruption is linked to a timeout exception (Error Code: 500.19) at timestamp 2025-06-27 19:33:00Z, affecting virtual machine scale set VM-12345678 with IP 192.168.1.10. The Azure deployment slot (slot-1, Revision: 0x1A2B3C4D) failed to propagate configuration settings, causing a mismatch in the App Service Plan (Plan ID: 0x9F8E7D6C) resource allocation (CPU: 2.5 GHz, RAM: 7GB).
+      Diagnostics from Azure Monitor reveal a 503 Service Unavailable response (Request ID: 0xDEADBEEF) due to an overloaded instance, potentially triggered by a surge in traffic (Peak Load: 1500 req/s) exceeding the allocated throughput (Limit: 1000 req/s). The Application Insights telemetry (Trace ID: 0xFEEDC0DE) points to a connection string error (Connection String ID: 0xBADC0FFEE) to the Azure SQL Database (Database ID: 0x12345678), with a latency spike of 450ms (Threshold: 200ms). The Azure Blob Storage sync (Container ID: 0xABCD1234) failed at block 0xF0E1D2C3, missing dependency file config.json (Size: 1024KB).
+      The CI/CD pipeline (Pipeline ID: 0x98765432) in Azure DevOps logged 15 failed deployment attempts (Build Number: 2025.06.27.01) due to a corrupted artifact (Artifact Hash: 0x5A6B7C8D), possibly from an invalid YAML configuration (Line 45, Column 12). The rollback to the last stable deployment (Version: 1.0.23, Commit Hash: 0x1D2E3F4A) is in progress, scaling the App Service Plan to 4 instances (Instance IDs: 0x4B5C6D7E, 0x8D9E0F1A). Azure Resource Health (Health Check ID: 0xC0DEBA5E) indicates a transient network glitch (Packet Loss: 3%) at 19:32:58Z.
+      Further investigation reveals a database deadlock (Deadlock ID: 0xDEADLOCK1) at transaction 0x7F89ABCD, impacting 15 concurrent queries (Query IDs: 0x1A2B3C4D, 0x5E6F7A8B). The error log (Log ID: 0xFACEFEED) shows 120 error events in the last hour, with a peak memory usage of 6.8GB (Limit: 7GB). Our team is analyzing Azure Activity Log (Event ID: 0xBEEFC0DE) for a root cause, suspecting a misconfigured environment variable (Key: AZURE_APP_SETTING, Value: 0xINVALID) or a library conflict (Version: 3.2.1 vs. Required: 3.2.0).
+      Mitigation includes restarting the App Service (Restart ID: 0xDECAFBAD) and increasing the timeout to 30 seconds (Timeout ID: 0xFEE1DEAD). Users are advised to retry after 10 minutes or contact support with User ID 0xUSER1234. This outage may persist due to a cascading failure (Failure Chain ID: 0xCAFEF00D) affecting 3 regions (Region IDs: 0xEASTUS, 0xWESTUS, 0xEUWEST). Check the support portal for updates (URL: 0xSUPPORTLINK) or email support@gtc-impulse.com with Incident ID: 0xERROR9999 for assistance.</p>
   </div>
   </body>
 </html>
