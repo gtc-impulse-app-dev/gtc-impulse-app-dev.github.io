@@ -14,9 +14,10 @@ const currentEnv = Env.DEVELOPMENT; // Default to development; change for other 
 const Config = {
     environment: currentEnv,
     api: {
-        baseUrl: currentEnv === Env.DEVELOPMENT ? 'http://localhost:3000' :
-            currentEnv === Env.STAGE ? 'https://stage-api.gtc-impulse.com' :
-                'https://api.gtc-impulse.com',
+        baseUrl: 'https://gtc-impulse-dev.azurewebsites.net',
+            // currentEnv === Env.DEVELOPMENT ? 'http://localhost:3000' :
+            // currentEnv === Env.STAGE ? 'https://stage-api.gtc-impulse.com' :
+            //     'https://api.gtc-impulse.com',
         timeout: 10000,
         headers: {
             'Content-Type': 'application/json',
