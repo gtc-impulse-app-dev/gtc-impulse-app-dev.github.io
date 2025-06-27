@@ -1,0 +1,108 @@
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: #ffffff;
+    color: #000000;
+    overflow-x: hidden;
+}
+
+.app-container {
+    padding: 24px;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.content {
+    max-width: 800px;
+    width: 100%;
+}
+
+.app-store-card {
+    background-color: #f5f5f5;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+@media (max-width: 600px) {
+    .app-store-card {
+        padding: 16px;
+        max-width: 300px;
+    }
+}
+
+.app-icon {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 16px;
+    border-radius: 12px;
+}
+
+.app-details {
+    flex-grow: 1;
+}
+
+h1 {
+    font-size: 24px;
+    margin: 0 0 8px 0;
+    color: #333333;
+}
+
+.company {
+    font-size: 14px;
+    color: #666666;
+    margin-bottom: 12px;
+}
+
+.description {
+    font-size: 16px;
+    color: #333333;
+    margin-bottom: 16px;
+    line-height: 1.5;
+    max-width: 500px;
+}
+
+@media (max-width: 600px) {
+    .description {
+        font-size: 12px;
+        max-width: 250px;
+        max-height: 60px;
+        overflow: hidden;
+    }
+}
+
+.instructions {
+    font-size: 14px;
+    color: #666666;
+    margin-bottom: 16px;
+}
+
+.install-button {
+    padding: 12px 24px;
+    background-color: #000000;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    width: 100%;
+    max-width: 200px;
+}
+
+.install-button:hover {
+    background-color: #333333;
+}
+
+@media (max-width: 600px) {
+    .install-button {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+}

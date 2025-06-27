@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="manifest" href="../manifest.json">
+  <link rel="stylesheet" href="../styles/login.css">
+  <title>GTC Impulse - Login</title>
+</head>
+<body>
+<div class="login-container">
+  <div class="login-card">
+    <img src="../assets/icon.png" alt="GTC Impulse Logo" class="logo">
+    <h2 class="app-name">GTC - Impulse</h2>
+    <h1>Login</h1>
+    <form id="login-form" class="login-form">
+      <input type="email" id="email" placeholder="Email" required>
+      <input type="password" id="password" placeholder="Password" required>
+      <button type="submit" class="login-button">Login</button>
+    </form>
+    <div id="error-message" class="error-message"></div>
+    <a href="/pages/register.html" class="register-link">Don’t have an account? Register</a>
+  </div>
+</div>
+<script src="../scripts/config.js" defer></script>
+<script src="../scripts/global.js" defer></script>
+<script src="../scripts/logger.js" defer></script>
+<script src="../scripts/login.js" defer></script>
+<script src="../service-worker.js" defer></script>
+</body>
+</html>
