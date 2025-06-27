@@ -1,4 +1,3 @@
-// Placeholder global functions
 const Global = {
     setUserId: function(userId) {
         return new Promise((resolve) => {
@@ -16,6 +15,20 @@ const Global = {
                 putRequest.onerror = () => resolve(false);
             };
             request.onerror = () => resolve(false);
+        });
+    },
+    getUserId: function() {
+        return new Promise((resolve) => {
+            const request = indexedDB.open('GTCImpulseDB', 1);
+            request.onsuccess = () => {
+                const db = request.result;
+                const transaction = db.transaction(['userStore'], 'readonly');
+                const store = transaction.objectStore('userStore');
+                const getRequest = store.get('userId');
+                getRequest.onsuccess = () => resolve(getRequest.result || null);
+                getRequest.onerror = () => resolve(null);
+            };
+            request.onerror = () => resolve(null);
         });
     }
 };
