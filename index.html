@@ -9,48 +9,18 @@
     <title>GTC Impulse - Install</title>
 </head>
 <body>
-<div class="app-container">
-    <div class="content">
-        <div class="app-store-card">
-            <img src="assets/icon.png" alt="GTC Impulse Icon" class="app-icon">
-            <div class="app-details">
-                <h1>GTC Impulse</h1>
-                <p class="company">GTC Solutions</p>
-                <p class="description">Manage shifts, scheduling, delivery, and more with ease. Stay productive with our all-in-one app designed for your business needs.</p>
-                <div id="install-instructions"></div>
-                <button onclick="installPWA()" class="install-button">Install</button>
-            </div>
+<div class="app-store-container">
+    <div class="app-store-card">
+        <img src="assets/icon.png" alt="GTC Impulse Icon" class="app-icon">
+        <div class="app-details">
+            <h1 class="app-name">GTC Impulse</h1>
+            <p class="company-name">GTC Logistics</p>
+            <p class="app-description">GTC Impulse is a powerful app designed to streamline your business operations. Manage shifts, scheduling, delivery, routes, employees, and more with ease. Stay productive with real-time updates and a user-friendly interface, optimized for all devices.</p>
+            <button id="install-button" class="install-button">Install</button>
         </div>
     </div>
 </div>
-<script>
-    // Detect device type
-    function detectDevice() {
-        const userAgent = navigator.userAgent.toLowerCase();
-        const isMobile = /iphone|ipad|android/.test(userAgent);
-        const isTablet = /(ipad|tablet|android(?!.*mobile))/.test(userAgent);
-        const isDesktop = !isMobile && !isTablet;
-        const instructionsDiv = document.getElementById('install-instructions');
-
-        if (isMobile || isTablet) {
-            instructionsDiv.innerHTML = '<p class="instructions">Tap the share icon and select "Add to Home Screen" to install.</p>';
-        } else if (isDesktop) {
-            instructionsDiv.innerHTML = '<p class="instructions">Use the browser menu (e.g., "Install" or "Add to Desktop") to install the app.</p>';
-        }
-    }
-
-    // Install PWA
-    function installPWA() {
-        if ('beforeinstallprompt' in window) {
-            window.dispatchEvent(new Event('beforeinstallprompt'));
-        } else {
-            alert('Please use the browser menu or share options to install the app.');
-        }
-    }
-
-    // Run device detection on load
-    document.addEventListener('DOMContentLoaded', detectDevice);
-</script>
+<script src="index.js" defer></script>
 <script src="service-worker.js" defer></script>
 </body>
 </html>
