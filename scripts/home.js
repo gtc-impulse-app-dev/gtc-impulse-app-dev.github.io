@@ -1,6 +1,6 @@
 // Access global objects
-const { Config, Logger } = window;
-const Global = window.Global;
+// const { Config, Logger } = window;
+// const Global = window.Global;
 
 // Fetch permissions from API
 async function fetchPermissions() {
