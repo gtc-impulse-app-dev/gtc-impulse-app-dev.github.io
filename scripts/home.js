@@ -1,6 +1,6 @@
 // Access global objects
-// const { Config, Logger } = window;
-// const Global = window.Global;
+const { Config, Logger } = window;
+const Global = window.Global;
 
 // Fetch permissions from API
 async function fetchPermissions() {
@@ -52,16 +52,18 @@ function renderHome(data) {
             { name: 'Employees', emoji: '👥', route: '/pages/employees.html' },
             { name: 'Roles & Permissions', emoji: '🔐', route: '/pages/roles.html' },
             { name: 'Profile & Settings', emoji: '⚙️', route: '/pages/settings.html' },
+            { name: 'Packages', emoji: '📦', route: '/pages/packages.html' },
         ];
 
         // Check all permissions and include Packages if any package-related permission exists
         const hasPackagePermission = data.screensPermissions.some(permission =>
-            permission.startsWith('package') || permission.startsWith('parcels')
+            permission.toLowerCase().startsWith('package') || permission.toLowerCase().startsWith('parcels')
         );
-        const permittedModules = modules.filter(module =>
-            data.screensPermissions.includes(module.name.toLowerCase()) ||
-            (module.name.toLowerCase() === 'packages' && hasPackagePermission)
-        );
+        const permittedModules = modules.filter(module => {
+            const moduleNameLower = module.name.toLowerCase();
+            return moduleNameLower === 'packages' ? hasPackagePermission :
+                data.screensPermissions.some(perm => perm.toLowerCase() === moduleNameLower);
+        });
 
         cardContainer.innerHTML = '';
         permittedModules.forEach(module => {
