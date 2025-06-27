@@ -18,13 +18,13 @@ self.addEventListener('install', (event) => {
             return cache.addAll([
                 // '/',
                 // '/index.html',
-                '/pages/login.html',
-                '/splash.html',
-                '/index.css',
-                '/styles/login.css',
+                // '/pages/login.html',
+                // '/splash.html',
+                // '/index.css',
+                // '/styles/login.css',
                 '/offline.html',
-                '/splash.css',
-                '/splash.js',
+                // '/splash.css',
+                // '/splash.js',
                 // '/manifest.json',
                 '/assets/icon.png'
             ]).catch((error) => {
@@ -33,9 +33,9 @@ self.addEventListener('install', (event) => {
                 return cache.addAll([
                     // '/',
                     // '/index.html',
-                    '/pages/login.html',
-                    '/index.css',
-                    '/styles/login.css',
+                    // '/pages/login.html',
+                    // '/index.css',
+                    // '/styles/login.css',
                     'offline.html',
                     // '/manifest.json'
                 ]);
