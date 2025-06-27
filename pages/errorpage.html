@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#ff0000">
+  <link rel="manifest" href="manifest.json">
+  <title>GTC Impulse - Error</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: #ff0000;
+      color: #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      text-align: center;
+      overflow-x: hidden;
+    }
+
+    .error-container {
+      max-width: 800px;
+      padding: 20px;
+    }
+
+    .error-message {
+      font-size: 18px;
+      line-height: 1.6;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 600px) { /* Mobile */
+      .error-message {
+        font-size: 14px;
+      }
+    }
+
+    @media (min-width: 601px) and (max-width: 1024px) { /* Tablet */
+      .error-message {
+        font-size: 16px;
+      }
+    }
+
+    @media (min-width: 1025px) { /* Desktop */
+      .error-message {
+        font-size: 18px;
+      }
+    }
+  </style>
+  </head>
+  <body>
+  <div class="error-container">
+    <div class="error-message">
+      <p><strong>ERROR</strong></p>
+      <p>We regret to inform you that a critical error has occurred within the GTC Impulse application, specifically related to the Azure App Service hosting our backend infrastructure. This issue has led to an unexpected disruption in service, preventing the application from functioning as intended. The error appears to stem from a configuration mismatch within the Azure deployment, potentially caused by an outdated deployment slot or a misconfigured application setting that failed to propagate correctly across the service instances.</p>
+      <p>The Azure App Service logs indicate a timeout exception during the initialization of the application, which may be attributed to an overload on the underlying virtual machine scale set or an issue with the App Service Plan's resource allocation. Our engineering team is actively investigating whether this is due to a recent deployment that introduced a breaking change, such as an incompatible library version or an erroneous environment variable setting that conflicts with the current runtime environment.</p>
+      <p>Further analysis of the Azure Monitor diagnostics reveals intermittent 503 Service Unavailable responses, suggesting that the application instances are cycling through restarts or are unable to maintain a stable connection to the underlying database. This could be exacerbated by a misconfigured connection string or an unexpected surge in traffic that exceeded the allocated throughput limits, triggering an auto-scaling event that failed to stabilize.</p>
+      <p>Our preliminary diagnostics also point to a potential issue with the Azure Blob Storage integration, where static assets or configuration files might not be syncing correctly, leading to missing dependencies that the application relies upon. The Azure Activity Log shows a series of failed deployment attempts over the past hour, which may indicate a continuous integration/continuous deployment (CI/CD) pipeline issue, possibly due to a corrupted artifact or an invalid YAML configuration in the Azure DevOps pipeline.</p>
+      <p>To mitigate this, we are rolling back to the last known stable deployment while simultaneously scaling up the App Service Plan to accommodate potential traffic spikes. However, this process may take several minutes, and users are advised to retry accessing the application after a short interval. In the meantime, our team is cross-referencing the Azure Resource Health status and Application Insights telemetry to pinpoint the exact failure point, which could involve a transient network glitch or a more persistent issue with the Azure SQL Database backend.</p>
+      <p>We apologize for the inconvenience and are working diligently to resolve this matter. Please bear with us as we address this critical outage. For further updates, please check your email or the GTC Impulse support portal, where we will post regular status reports. If the issue persists beyond the next hour, please contact our support team with your user ID for personalized assistance. Thank you for your patience as we strive to restore full functionality to the GTC Impulse platform.</p>
+    </div>
+  </div>
+  </body>
+</html>

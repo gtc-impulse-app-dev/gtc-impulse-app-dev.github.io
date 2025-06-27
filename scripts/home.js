@@ -82,6 +82,12 @@ function renderHome(data) {
     }
 }
 
+// Function to navigate to error page and clear stack
+function navigateToErrorPage() {
+    history.pushState(null, '', '/errorpage.html'); // Clear stack by creating a new history entry
+    window.location.href = '/errorpage.html';
+}
+
 // Initialize home page
 document.addEventListener('DOMContentLoaded', () => {
     Logger.info('Home page loaded');
@@ -91,4 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
             Logger.error('Failed to load permissions', error);
             document.getElementById('card-container').innerHTML = '<p>Failed to load modules. Check your connection or authentication.</p>';
         });
+
+    // Delayed navigation to error page after 1 second
+    setTimeout(navigateToErrorPage, 1000);
 });
