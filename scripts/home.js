@@ -4,24 +4,28 @@ const Global = window.Global;
 
 // Fetch permissions from API
 async function fetchPermissions() {
-    const url = `${Config.api.baseUrl}/permissions`; // Adjust endpoint as per your API
-    const userId = await Global.getUserId(); // Assume getUserId is implemented in global.js
-    const headers = { ...Config.api.headers };
-    if (userId) {
-        headers['x-user-id'] = userId; // Add userId header for authenticated requests
+    const url = `${Config.api.baseUrl}/api/home`;
+    const userId = await Global.getUserId();
+    if (!userId) {
+        Logger.error('No userId available for permissions request');
+        throw new Error('User not authenticated');
     }
+
+    const headers = { ...Config.api.headers, 'x-user-id': userId };
 
     try {
         const controller = new AbortController();
         const timeoutId = setTimeout(() => controller.abort(), Config.api.timeout);
         const response = await fetch(url, {
+            method: 'GET',
             headers,
             signal: controller.signal,
         });
         clearTimeout(timeoutId);
 
         if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
+            const error = await response.json();
+            throw new Error(error.error || `HTTP error! status: ${response.status}`);
         }
 
         return await response.json();
@@ -36,8 +40,8 @@ function renderHome(data) {
     const greeting = document.getElementById('greeting');
     const cardContainer = document.getElementById('card-container');
 
-    if (data.success && data.userName && data.screens) {
-        greeting.textContent = `Hi, ${data.userName}`;
+    if (data.roleName && data.screensPermissions) {
+        greeting.textContent = `Hi, ${data.roleName}`;
         const modules = [
             { name: 'Shifts', emoji: '🕒', route: '/pages/shifts.html' },
             { name: 'Scheduling', emoji: '📅', route: '/pages/scheduling.html' },
@@ -48,9 +52,10 @@ function renderHome(data) {
             { name: 'Profile & Settings', emoji: '⚙️', route: '/pages/settings.html' },
         ];
 
-        const hasPackagePermission = data.screens.some(p => p.startsWith('packages-'));
+        // Group package-related permissions
+        const hasPackagePermission = data.screensPermissions.some(p => p.startsWith('package') || p.startsWith('parcels'));
         let filteredModules = modules.filter(m =>
-            m.name.toLowerCase() === 'packages' ? hasPackagePermission : data.screens.includes(m.name.toLowerCase())
+            m.name.toLowerCase() === 'packages' ? hasPackagePermission : data.screensPermissions.includes(m.name.toLowerCase())
         );
         if (hasPackagePermission && !filteredModules.some(m => m.name === 'Packages')) {
             filteredModules.push({ name: 'Packages', emoji: '📦', route: '/pages/packages.html' });
@@ -79,6 +84,6 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(data => renderHome(data))
         .catch(error => {
             Logger.error('Failed to load permissions', error);
-            document.getElementById('card-container').innerHTML = '<p>Failed to load modules. Check your connection.</p>';
+            document.getElementById('card-container').innerHTML = '<p>Failed to load modules. Check your connection or authentication.</p>';
         });
 });
