@@ -1,5 +1,5 @@
 // Constant for minimum wait time in seconds
-const MIN_WAIT_TIME = 5; // Adjust this value as needed
+const MIN_WAIT_TIME = 6; // Adjust this value as needed
 
 // Access global functions
 // const Global = window.Global;

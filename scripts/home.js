@@ -70,10 +70,10 @@ function renderHome(data) {
             const card = document.createElement('div');
             card.className = 'card';
             card.innerHTML = `<span class="card-emoji">${module.emoji}</span><span class="card-text">${module.name}</span>`;
-            card.addEventListener('click', () => {
-                Logger.info('Navigating to module', { module: module.name });
-                window.location.href = module.route;
-            });
+            // card.addEventListener('click', () => {
+            //     Logger.info('Navigating to module', { module: module.name });
+            //     window.location.href = module.route;
+            // });
             cardContainer.appendChild(card);
         });
     } else {
